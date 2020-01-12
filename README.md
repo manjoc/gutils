@@ -19,6 +19,7 @@ go get github.com/CatchZeng/gutils
   - Exist
   - Mode
   - WriteStringToFile
+  - AppendStringToFile
 - log
   - L
   - LW
