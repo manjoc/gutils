@@ -29,3 +29,26 @@ func IsCapitalize(s string) bool {
 	}
 	return unicode.IsUpper([]rune(s)[0])
 }
+
+// SplitToChunks Split large string in n-size chunks
+func SplitToChunks(s string, chunkSize int) []string {
+	if chunkSize < 1 {
+		return []string{}
+	}
+
+	var chunks []string
+	runes := []rune(s)
+
+	if len(runes) == 0 {
+		return []string{s}
+	}
+
+	for i := 0; i < len(runes); i += chunkSize {
+		nn := i + chunkSize
+		if nn > len(runes) {
+			nn = len(runes)
+		}
+		chunks = append(chunks, string(runes[i:nn]))
+	}
+	return chunks
+}

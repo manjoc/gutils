@@ -4,15 +4,30 @@
 
 ## Install
 
-```
+```shell
 go get github.com/CatchZeng/gutils
 ```
 
 ## Packages
 
-- [x] convert
-- [x] file
-- [x] os
+- convert
+  - StringToBytes
+  - BytesToString
+  - JSONToMap
+- file
+  - Exists
+  - Exist
+  - Mode
+  - WriteStringToFile
+- log
+  - L
+  - LW
+- os
+  - RunBashCommand
+- strings
+  - Capitalize
+  - IsCapitalize
+  - SplitToChunks
 
 ## Usage
 
