@@ -20,3 +20,13 @@ func JSONToMap(jsonStr string) (map[string]string, error) {
 	}
 	return dat, nil
 }
+
+// MapToJSON map to json string
+func MapToJSON(m map[string]string) (string, error) {
+	jsonByte, err := json.Marshal(m)
+	if err != nil {
+		return "", err
+	}
+	jsonStr := string(jsonByte)
+	return jsonStr, nil
+}

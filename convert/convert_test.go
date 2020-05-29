@@ -83,3 +83,47 @@ func TestJSONToMap(t *testing.T) {
 		})
 	}
 }
+
+func TestMapToJSON(t *testing.T) {
+	type args struct {
+		m map[string]string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		want    string
+		wantErr bool
+	}{
+		{
+			name: "",
+			args: args{
+				map[string]string{
+					"Port":      "80",
+					"Namespace": "appboot",
+				},
+			},
+			want:    `{"Namespace":"appboot","Port":"80"}`,
+			wantErr: false,
+		},
+		{
+			name: "",
+			args: args{
+				map[string]string{},
+			},
+			want:    `{}`,
+			wantErr: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := MapToJSON(tt.args.m)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("MapToJSON() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if got != tt.want {
+				t.Errorf("MapToJSON() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

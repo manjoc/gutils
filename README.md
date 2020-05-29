@@ -14,6 +14,7 @@ go get github.com/CatchZeng/gutils
   - StringToBytes
   - BytesToString
   - JSONToMap
+  - MapToJSON
 - file
   - Exists
   - Exist
