@@ -4,16 +4,13 @@ export GO111MODULE=on
 export GOPROXY=https://goproxy.cn,direct
 export GOSUMDB=off
 
-all: fmt
-	echo 'make all'
 fmt:
 	gofmt -w .
 mod:
 	go mod tidy
-build:
-	go build main.go
 utest:
 	go test -coverpkg=./... -coverprofile=coverage.data ./...
 help:
-	@echo "make - compile the source code"
-	@echo "make clean - remove binary file and vim swp files"
+	@echo "make fmt - format code"
+	@echo "make mod - mod tidy"
+	@echo "make utest - unit test"

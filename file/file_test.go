@@ -1,7 +1,10 @@
 package file
 
 import (
+	"io/ioutil"
 	"os"
+	"path"
+	"reflect"
 	"testing"
 )
 
@@ -53,5 +56,106 @@ func TestMode(t *testing.T) {
 				t.Errorf("Mode() = %v, want %v", got, tt.want)
 			}
 		})
+	}
+}
+
+func TestWriteStringToFile(t *testing.T) {
+	tempDir, err := ioutil.TempDir(os.TempDir(), "WriteStringToFile")
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+	defer os.RemoveAll(tempDir)
+
+	filePath := path.Join(tempDir, "a.txt")
+	err = WriteStringToFile("abc", filePath, 0777)
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+
+	file, err := os.Open(filePath)
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+	defer file.Close()
+
+	bytes, err := ioutil.ReadAll(file)
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+
+	content := string(bytes)
+
+	if content != "abc" {
+		t.Errorf(err.Error())
+	}
+}
+
+func TestAppendStringToFile(t *testing.T) {
+	tempDir, err := ioutil.TempDir(os.TempDir(), "AppendStringToFile")
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+	defer os.RemoveAll(tempDir)
+
+	filePath := path.Join(tempDir, "a.txt")
+	err = WriteStringToFile("abc", filePath, 0777)
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+
+	err = AppendStringToFile("def", filePath)
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+
+	file, err := os.Open(filePath)
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+	defer file.Close()
+
+	bytes, err := ioutil.ReadAll(file)
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+
+	content := string(bytes)
+
+	if content != "abcdef" {
+		t.Errorf(err.Error())
+	}
+}
+
+func TestGetDirList(t *testing.T) {
+	tempDir, err := ioutil.TempDir(os.TempDir(), "GetDirList")
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+	defer os.RemoveAll(tempDir)
+
+	filePath := path.Join(tempDir, "a.txt")
+	err = WriteStringToFile("abc", filePath, 0777)
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+
+	dir1 := path.Join(tempDir, "d1")
+	dir2 := path.Join(tempDir, "d2")
+
+	if err = os.MkdirAll(dir1, 0755); err != nil {
+		t.Errorf(err.Error())
+	}
+	if err = os.MkdirAll(dir2, 0755); err != nil {
+		t.Errorf(err.Error())
+	}
+
+	dirList, err := GetDirList(tempDir)
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+
+	want := []string{"d1", "d2"}
+	if !reflect.DeepEqual(dirList, want) {
+		t.Errorf("got %v want %v", dirList, want)
 	}
 }

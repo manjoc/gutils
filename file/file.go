@@ -2,7 +2,10 @@ package file
 
 import (
 	"io/ioutil"
+	"log"
 	"os"
+	"path/filepath"
+	"strings"
 
 	"github.com/CatchZeng/gutils/convert"
 )
@@ -48,4 +51,29 @@ func AppendStringToFile(content string, filePath string) error {
 		return err
 	}
 	return nil
+}
+
+// GetDirList get directory list
+func GetDirList(path string) ([]string, error) {
+	var dirList []string
+
+	paths, err := filepath.Glob(filepath.Join(path, "*"))
+
+	log.Printf("paths: %v", paths)
+
+	for _, value := range paths {
+		f, err := os.Stat(value)
+		if err != nil {
+			return dirList, err
+		}
+		if f.IsDir() {
+			dir := strings.Replace(value, path, "", 1)
+			if strings.HasPrefix(dir, "/") {
+				dir = strings.Replace(dir, "/", "", 1)
+			}
+			dirList = append(dirList, dir)
+		}
+	}
+
+	return dirList, err
 }

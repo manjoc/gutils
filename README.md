@@ -20,6 +20,9 @@ go get github.com/CatchZeng/gutils
   - Mode
   - WriteStringToFile
   - AppendStringToFile
+  - GetDirList
+- flag
+  - IsTesting
 - log
   - L
   - LW
