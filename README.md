@@ -22,6 +22,7 @@ go get github.com/CatchZeng/gutils
   - WriteStringToFile
   - AppendStringToFile
   - GetDirList
+  - GetDirListWithFilter
 - flag
   - IsTesting
 - log

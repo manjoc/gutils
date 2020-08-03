@@ -5,6 +5,7 @@ import (
 	"os"
 	"path"
 	"reflect"
+	"strings"
 	"testing"
 )
 
@@ -155,6 +156,25 @@ func TestGetDirList(t *testing.T) {
 	}
 
 	want := []string{"d1", "d2"}
+	if !reflect.DeepEqual(dirList, want) {
+		t.Errorf("got %v want %v", dirList, want)
+	}
+
+	dir3 := path.Join(tempDir, ".d3")
+	if err = os.MkdirAll(dir3, 0755); err != nil {
+		t.Errorf(err.Error())
+	}
+
+	dirList, err = GetDirListWithFilter(tempDir, func(file os.FileInfo) bool {
+		if strings.HasPrefix(file.Name(), ".") {
+			return false
+		}
+		return true
+	})
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+	want = []string{"d1", "d2"}
 	if !reflect.DeepEqual(dirList, want) {
 		t.Errorf("got %v want %v", dirList, want)
 	}

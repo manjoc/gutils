@@ -55,6 +55,14 @@ func AppendStringToFile(content string, filePath string) error {
 
 // GetDirList get directory list
 func GetDirList(path string) ([]string, error) {
+	return GetDirListWithFilter(path, nil)
+}
+
+// Filter file filter
+type Filter func(os.FileInfo) bool
+
+// GetDirListWithFilter get directory list with filter
+func GetDirListWithFilter(path string, filter Filter) ([]string, error) {
 	var dirList []string
 
 	paths, err := filepath.Glob(filepath.Join(path, "*"))
@@ -65,6 +73,9 @@ func GetDirList(path string) ([]string, error) {
 		f, err := os.Stat(value)
 		if err != nil {
 			return dirList, err
+		}
+		if filter != nil && !filter(f) {
+			continue
 		}
 		if f.IsDir() {
 			dir := strings.Replace(value, path, "", 1)
