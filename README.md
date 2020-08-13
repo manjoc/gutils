@@ -34,6 +34,9 @@ go get github.com/CatchZeng/gutils
   - Capitalize
   - IsCapitalize
   - SplitToChunks
+- version
+  - Stringify
+  - StringifyWithOps
 
 ## Usage
 
