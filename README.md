@@ -37,6 +37,8 @@ go get github.com/CatchZeng/gutils
 - version
   - Stringify
   - StringifyWithOps
+- array
+  - ContainString
 
 ## Usage
 
