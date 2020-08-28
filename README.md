@@ -10,6 +10,8 @@ go get github.com/CatchZeng/gutils
 
 ## Packages
 
+- array
+  - ContainString
 - convert
   - StringToBytes
   - BytesToString
@@ -28,6 +30,8 @@ go get github.com/CatchZeng/gutils
 - log
   - L
   - LW
+- net
+  - GetIP
 - os
   - RunBashCommand
 - strings
@@ -37,8 +41,6 @@ go get github.com/CatchZeng/gutils
 - version
   - Stringify
   - StringifyWithOps
-- array
-  - ContainString
 
 ## Usage
 
