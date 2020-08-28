@@ -88,3 +88,25 @@ func GetDirListWithFilter(path string, filter Filter) ([]string, error) {
 
 	return dirList, err
 }
+
+// RecreateDir recreate dir
+func RecreateDir(dir string) error {
+	mode := Mode(dir)
+	_ = os.RemoveAll(dir)
+	return os.MkdirAll(dir, mode)
+}
+
+// GetFilepaths get all filepaths in a directory tree
+func GetFilepaths(dir string) ([]string, error) {
+	var paths []string
+	err := filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+		if !info.IsDir() {
+			paths = append(paths, path)
+		}
+		return nil
+	})
+	return paths, err
+}

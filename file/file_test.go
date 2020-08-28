@@ -179,3 +179,34 @@ func TestGetDirList(t *testing.T) {
 		t.Errorf("got %v want %v", dirList, want)
 	}
 }
+
+func TestRecreateDir(t *testing.T) {
+	tempDir, err := ioutil.TempDir(os.TempDir(), "RecreateDir")
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+	defer os.RemoveAll(tempDir)
+
+	dir1 := path.Join(tempDir, "d1")
+	if err = os.MkdirAll(dir1, 0755); err != nil {
+		t.Errorf(err.Error())
+	}
+
+	dirList, err := GetDirList(tempDir)
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+	if len(dirList) != 1 {
+		t.Error("RecreateDir() error")
+	}
+
+	RecreateDir(tempDir)
+
+	dirList, err = GetDirList(tempDir)
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+	if len(dirList) != 0 {
+		t.Error("RecreateDir() error")
+	}
+}

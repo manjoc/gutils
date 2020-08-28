@@ -25,6 +25,8 @@ go get github.com/CatchZeng/gutils
   - AppendStringToFile
   - GetDirList
   - GetDirListWithFilter
+  - RecreateDir
+  - GetFilepaths
 - flag
   - IsTesting
 - log
