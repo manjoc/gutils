@@ -110,3 +110,34 @@ func GetFilepaths(dir string) ([]string, error) {
 	})
 	return paths, err
 }
+
+// File template file
+type File struct {
+	Path    string
+	Content string
+}
+
+// GetFiles get files
+func GetFiles(dir string) ([]*File, error) {
+	var files []*File
+
+	paths, err := GetFilepaths(dir)
+	if err != nil {
+		return files, err
+	}
+
+	for _, path := range paths {
+		bytes, err := ioutil.ReadFile(path)
+		if err != nil {
+			return files, err
+		}
+		content := string(bytes)
+		file := &File{
+			Path:    path,
+			Content: content,
+		}
+		files = append(files, file)
+	}
+
+	return files, nil
+}

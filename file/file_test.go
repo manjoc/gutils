@@ -210,3 +210,87 @@ func TestRecreateDir(t *testing.T) {
 		t.Error("RecreateDir() error")
 	}
 }
+
+func TestGetFilepaths(t *testing.T) {
+	tempDir, err := ioutil.TempDir(os.TempDir(), "GetFilepaths")
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+	defer os.RemoveAll(tempDir)
+
+	aTxt := path.Join(tempDir, "a.txt")
+	err = WriteStringToFile("a", aTxt, 0777)
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+
+	bTxt := path.Join(tempDir, "b.txt")
+	err = WriteStringToFile("b", bTxt, 0777)
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+
+	dir1 := path.Join(tempDir, "d1")
+	if err = os.MkdirAll(dir1, 0755); err != nil {
+		t.Errorf(err.Error())
+	}
+
+	cTxt := path.Join(tempDir, "d1", "c.txt")
+	err = WriteStringToFile("c", cTxt, 0777)
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+
+	paths, err := GetFilepaths(tempDir)
+	if err != nil {
+		t.Error("GetFilepaths() error")
+	}
+
+	if len(paths) != 3 {
+		t.Error("GetFilepaths() error")
+	}
+}
+
+func TestGetFiles(t *testing.T) {
+	tempDir, err := ioutil.TempDir(os.TempDir(), "GetFiles")
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+	defer os.RemoveAll(tempDir)
+
+	aTxt := path.Join(tempDir, "a.txt")
+	err = WriteStringToFile("a", aTxt, 0777)
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+
+	bTxt := path.Join(tempDir, "b.txt")
+	err = WriteStringToFile("b", bTxt, 0777)
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+
+	dir1 := path.Join(tempDir, "d1")
+	if err = os.MkdirAll(dir1, 0755); err != nil {
+		t.Errorf(err.Error())
+	}
+
+	cTxt := path.Join(tempDir, "d1", "c.txt")
+	err = WriteStringToFile("c", cTxt, 0777)
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+
+	files, err := GetFiles(tempDir)
+	if err != nil {
+		t.Error("GetFiles() error")
+	}
+
+	if len(files) != 3 {
+		t.Error("GetFiles() error")
+	}
+
+	if files[0].Content != "a" && files[1].Content != "b" && files[2].Content != "c" {
+		t.Error("GetFiles() error")
+	}
+}
