@@ -1,17 +1,17 @@
 # gutils
 
-![Go](https://github.com/CatchZeng/gutils/workflows/Go/badge.svg)
+![Go](https://github.com/manjoc/gutils/workflows/Go/badge.svg)
 [![codecov](https://codecov.io/gh/CatchZeng/gutils/branch/master/graph/badge.svg)](https://codecov.io/gh/CatchZeng/gutils)
-[![Go Report Card](https://goreportcard.com/badge/github.com/CatchZeng/gutils)](https://goreportcard.com/report/github.com/CatchZeng/gutils)
-[![Release](https://img.shields.io/github/release/CatchZeng/gutils.svg)](https://github.com/CatchZeng/gutils/releases)
-[![GoDoc](https://godoc.org/github.com/CatchZeng/gutils?status.svg)](https://pkg.go.dev/github.com/CatchZeng/gutils?tab=doc)
+[![Go Report Card](https://goreportcard.com/badge/github.com/manjoc/gutils)](https://goreportcard.com/report/github.com/manjoc/gutils)
+[![Release](https://img.shields.io/github/release/CatchZeng/gutils.svg)](https://github.com/manjoc/gutils/releases)
+[![GoDoc](https://godoc.org/github.com/manjoc/gutils?status.svg)](https://pkg.go.dev/github.com/manjoc/gutils?tab=doc)
 
 > go utils
 
 ## Install
 
 ```shell
-go get github.com/CatchZeng/gutils
+go get github.com/manjoc/gutils
 ```
 
 ## Packages

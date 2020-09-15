@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/CatchZeng/gutils/convert"
+	"github.com/manjoc/gutils/convert"
 )
 
 // Exists reports whether the file or directory exists.
